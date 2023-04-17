@@ -4,7 +4,7 @@
  * @param {*} quote2 Quote 2
  * @returns houseprofit (1.05335)
  */
-function houseProfit(quote1, quote2) {
+function getHouseProfit(quote1, quote2) {
   return Math.abs(1 / quote1 + 1 / quote2);
 }
 /**
@@ -65,11 +65,8 @@ function getValues() {
   values[secondOption] = Number(secondValue);
   values[thirdOption] = Number(thirdValue);
 
+  delete values["none"];
 
-  if (values["none"]) {
-    delete values["none"];
-  }
-  
   console.log(values);
 
   let results = getAllValues(values);
@@ -138,37 +135,40 @@ function getAllValues(input) {
   let quote2 = input.quote2;
   let winPercentage1 = input.winPercentage1;
   let winPercentage2 = input.winPercentage2;
-  let houseProfit2 = input.houseProfit;
+  let houseProfit = input.houseProfit;
+
   if (quote1 == null) {
-    if (quote2 == null) {
-      quote1 = getQuoteByProbAndRes(winPercentage1, houseProfit2);
-    }
-    quote1 = getQuoteFromByPlayer(quote2, houseProfit2);
+      if (quote2 == null) {
+          quote1 = getQuoteByProbAndRes(winPercentage1, houseProfit);
+      }else{
+          quote1 = getQuoteFromByPlayer(quote2, houseProfit);
+      }
   }
 
   if (quote2 == null) {
-    if (quote1 == null) {
-      quote2 = getQuoteByProbAndRes(winPercentage2, houseProfit2);
-    }
-    quote2 = getQuoteFromByPlayer(quote1, houseProfit2);
+      if (quote1 == null) {
+          quote2 = getQuoteByProbAndRes(winPercentage2, houseProfit);
+      }else{
+          quote2 = getQuoteFromByPlayer(quote1, houseProfit);
+      }
   }
 
   if (winPercentage1 == null) {
-    winPercentage1 = getProbability(quote1, quote2);
+      winPercentage1 = getProbability(quote1, quote2);
   }
   if (winPercentage2 == null) {
-    winPercentage2 = getProbability(quote2, quote1);
+      winPercentage2 = getProbability(quote2, quote1);
   }
 
-  if (houseProfit2 == null) {
-    houseProfit2 = houseProfit(quote1, quote2);
+  if (houseProfit == null) {
+      houseProfit = getHouseProfit(quote1, quote2);
   }
 
   return {
-    quote1,
-    quote2,
-    winPercentage1,
-    winPercentage2,
-    houseProfit: houseProfit2,
-  };
+      quote1,
+      quote2,
+      winPercentage1,
+      winPercentage2,
+      houseProfit
+  }
 }
