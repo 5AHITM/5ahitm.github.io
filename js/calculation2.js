@@ -1,3 +1,49 @@
+/**
+ *
+ * @param {*} quote1 Quote 1
+ * @param {*} quote2 Quote 2
+ * @returns houseprofit (1.05335)
+ */
+function houseProfit(quote1, quote2) {
+  return Math.abs(1 / quote1 + 1 / quote2);
+}
+/**
+ *
+ * @param {*} quote1 Quote 1
+ * @param {*} quote2 Quote 2
+ * @returns probability of first quote(54.83028720626633)
+ */
+function getProbability(quote1, quote2) {
+  return (1 / quote1 / (1 / quote1 + 1 / quote2)) * 100;
+}
+
+/**
+ *
+ * @param {*} quote1 given quote (1.73)
+ * @param {*} result houseprofit  (1.05335)
+ * @returns second quote (2.1)
+ */
+function getQuoteFromByPlayer(quote1, result) {
+  return 1 / (result - 1 / quote1);
+}
+
+// P & Res -> Q
+function getQuoteByProbAndRes(probability, result) {
+  return -100 / ((probability - 100) * result);
+}
+
+// Q & Res -> P
+
+function getProbabilityByQuoteAndRes(quote, result) {
+  return 100 - (-100 / (quote * result) + 100);
+}
+
+// Q & P -> Res
+
+function getResByQuoteAndProb(quote, probability2) {
+  return 1 / (1 / quote + (1 - probability2 / 100) / quote);
+}
+
 function getValues() {
   let firstOption = document.getElementById("first").value;
   let secondOption = document.getElementById("second").value;
@@ -19,13 +65,7 @@ function getValues() {
   values[secondOption] = Number(secondValue);
   values[thirdOption] = Number(thirdValue);
 
-  let results = {
-    quote1: 3,
-    quote2: 1,
-    winPercentage1: 1000,
-    winPercentage2: 9,
-    houseProfit: 29,
-  };
+  let results = getAllValues(values);
 
   delete results[firstOption];
   delete results[secondOption];
@@ -75,7 +115,7 @@ let quoteOptions = [
 
 document.querySelectorAll(".select-options").forEach(function (el) {
   let div = document.createElement("option");
-  div.innerHTML = "Select";
+  div.innerHTML = "None";
   div.value = "";
   el.appendChild(div);
   quoteOptions.forEach(function (option) {
@@ -85,3 +125,43 @@ document.querySelectorAll(".select-options").forEach(function (el) {
     el.appendChild(div);
   });
 });
+
+function getAllValues(input) {
+  let quote1 = input.quote1;
+  let quote2 = input.quote2;
+  let winPercentage1 = input.winPercentage1;
+  let winPercentage2 = input.winPercentage2;
+  let houseProfit2 = input.houseProfit;
+  if (quote1 == null) {
+    if (quote2 == null) {
+      quote1 = getQuoteByProbAndRes(winPercentage1, houseProfit2);
+    }
+    quote1 = getQuoteFromByPlayer(quote2, houseProfit2);
+  }
+
+  if (quote2 == null) {
+    if (quote1 == null) {
+      quote2 = getQuoteByProbAndRes(winPercentage2, houseProfit2);
+    }
+    quote2 = getQuoteFromByPlayer(quote1, houseProfit2);
+  }
+
+  if (winPercentage1 == null) {
+    winPercentage1 = getProbability(quote1, quote2);
+  }
+  if (winPercentage2 == null) {
+    winPercentage2 = getProbability(quote2, quote1);
+  }
+
+  if (houseProfit2 == null) {
+    houseProfit2 = houseProfit(quote1, quote2);
+  }
+
+  return {
+    quote1,
+    quote2,
+    winPercentage1,
+    winPercentage2,
+    houseProfit: houseProfit2,
+  };
+}
