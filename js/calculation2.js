@@ -59,6 +59,9 @@ function getValues() {
     winPercentage1: null,
     winPercentage2: null,
     houseProfit: null,
+    probabilityFrame1: null,
+    probabilityFrame2: null,
+    amount: null,
   };
 
   values[firstOption] = Number(firstValue);
@@ -88,17 +91,6 @@ function getValues() {
     document.querySelector(".results").appendChild(div);
   }
 }
-
-let ratings = {
-  quote1: "",
-  quote2: "",
-  probability1: "",
-  probability2: "",
-  probabilityFrame1: "",
-  probabilityFrame2: "",
-  amount: 0,
-  result: 0,
-};
 
 let quoteOptions = [
   { id: "quote1", name: "Quote 1" },
