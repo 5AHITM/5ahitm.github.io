@@ -12,37 +12,48 @@
     <nav>
       <img src="images/gold-dollar.png" alt="My Logo" />
       <a href="html/guidance.html">Guidance</a>
-      <a href="#">About Us</a>
+      <a href="html/about-us.html">About Us</a>
       <a href="#">FAQ</a>
     </nav>
 
     <div class="container">
       <h1>BETTING RATE CALCULATOR</h1>
-      <label for="firstQuote">Quote 1:</label>
+
+      <label for="first">First option:</label>
+      <select class="select-options" name="first" id="first"></select>
       <input
         type="number"
         id="firstQuote"
         name="firstQuote"
-        placeholder="Quote 1"
+        placeholder="Wert"
       />
 
-      <label for="secondQuote">Quote 2:</label>
+      
+      <label for="first">Second option:</label>
+      <select class="select-options" name="second" id="second"></select>
       <input
         type="number"
         id="secondQuote"
         name="secondQuote"
-        placeholder="Quote 2"
+        placeholder="Wert"
       />
 
-      <label for="result">Verdienstprozente in %:</label>
+      
+      <label for="first">Third option(optional):</label>
+      <select class="select-options" name="third" id="third"></select>
       <input
         type="number"
         id="result"
         name="Result"
-        placeholder="Verdienstprozente in %:"
+        placeholder="Wert"
       />
 
-      <input type="submit" value="Submit" onclick="getValues()" />
+      <input
+        type="submit"
+        value="Submit"
+        onclick="getValues()"
+        class="glossy-button glossy-button--gold"
+      />
     </div>
   </body>
 </html>

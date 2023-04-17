@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ</title>
+    <script src="js/calculation.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/styles.css" />
+
+    <script>
+      function toggleAnswer(id) {
+        var answer = document.getElementById(id);
+        if (answer.style.display === "none") {
+          answer.style.display = "block";
+        } else {
+          answer.style.display = "none";
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>FAQ</h1>
+      <div class="question" onclick="toggleAnswer('answer1')">
+        <h3>Frage 1?</h3>
+        <div id="answer1" class="answer">
+          <p>Antwort 1.</p>
+        </div>
+      </div>
+      <div class="question" onclick="toggleAnswer('answer2')">
+        <h3>Frage 2?</h3>
+        <div id="answer2" class="answer">
+          <p>Antwort 2.</p>
+        </div>
+      </div>
+      <div class="question" onclick="toggleAnswer('answer3')">
+        <h3>Frage 3?</h3>
+        <div id="answer3" class="answer">
+          <p>Antwort 3.</p>
+        </div>
+      </div>
+      <div class="question" onclick="toggleAnswer('answer4')">
+        <h3>Frage 4?</h3>
+        <div id="answer4" class="answer">
+          <p>Antwort 4.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
