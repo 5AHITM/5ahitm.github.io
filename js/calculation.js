@@ -3,25 +3,23 @@ function getHouseProfit(quote1, quote2) {
 }
 
 function getData() {
-
-    
-
     let data = {
-        "quote1": document.getElementById('quote1').value,
-        'quote2': document.getElementById('quote2').value,
-        'winPercentage1': document.getElementById('winPercentage1').value,
-        'winPercentage2': document.getElementById('winPercentage2').value,
-        'houseProfit': document.getElementById('houseProfit').value
+        'quote1': Number(document.getElementById('quote1').value)==0?null:Number(document.getElementById('quote1').value),
+        'quote2': Number(document.getElementById('quote2').value)==0?null:Number(document.getElementById('quote2').value),
+        'winPercentage1': Number(document.getElementById('winPercentage1').value)==0?null:Number(document.getElementById('winPercentage1').value),
+        'winPercentage2': Number(document.getElementById('winPercentage2').value)==0?null:Number(document.getElementById('winPercentage2').value),
+        'houseProfit': Number(document.getElementById('houseProfit').value)==0?null:Number(document.getElementById('houseProfit').value)
     }
 
     console.log(data);
     let newData = getAllValues(data);
+    console.log('newData ', newData)
 
-    document.getElementById('quote1').value = newData.quote1;
-    document.getElementById('quote2').value = newData.quote2;
-    document.getElementById('winPercentage1').value = newData.winPercentage1;
-    document.getElementById('winPercentage2').value = newData.winPercentage2;
-    document.getElementById('houseProfit').value = newData.houseProfit;
+    document.getElementById('quote1').value = Math.round(newData.quote1 * 100) / 100;
+    document.getElementById('quote2').value = Math.round(newData.quote2 * 100) / 100;
+    document.getElementById('winPercentage1').value = Math.round(newData.winPercentage1 * 100) / 100;
+    document.getElementById('winPercentage2').value = Math.round(newData.winPercentage2 * 100) / 100;
+    document.getElementById('houseProfit').value = Math.round(newData.houseProfit * 100) / 100;
 }
 
 function getAllValues(input) {
@@ -30,18 +28,21 @@ function getAllValues(input) {
     let winPercentage1 = input.winPercentage1;
     let winPercentage2 = input.winPercentage2;
     let houseProfit = input.houseProfit;
+
     if (quote1 == null) {
         if (quote2 == null) {
             quote1 = getQuoteByProbAndRes(winPercentage1, houseProfit);
+        }else{
+            quote1 = getQuoteFromByPlayer(quote2, houseProfit);
         }
-        quote1 = getQuoteFromByPlayer(quote2, houseProfit);
     }
 
     if (quote2 == null) {
         if (quote1 == null) {
             quote2 = getQuoteByProbAndRes(winPercentage2, houseProfit);
+        }else{
+            quote2 = getQuoteFromByPlayer(quote1, houseProfit);
         }
-        quote2 = getQuoteFromByPlayer(quote1, houseProfit);
     }
 
     if (winPercentage1 == null) {
@@ -78,6 +79,10 @@ function getProbabilityByQuoteAndRes(quote, result) {
 
 function getResByQuoteAndProb(quote, probability2) {
     return 1 / (1 / quote + (1 - probability2 / 100) / quote);
+}
+
+function getProbability(quote1, quote2) {
+    return (1 / quote1 / ((1 / quote1) + (1 / quote2))) * 100;
 }
 
 
