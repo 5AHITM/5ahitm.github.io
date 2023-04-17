@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BETTING RATE CALCULATOR</title>
+    <script src="js/calculation2.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  </head>
+  <body>
+    <nav>
+      <img src="images/gold-dollar.png" alt="My Logo" />
+      <a href="html/guidance.html">Guidance</a>
+      <a href="html/about-us.html">About Us</a>
+      <a href="#">FAQ</a>
+    </nav>
+
+    <div class="container">
+      <h1>BETTING RATE CALCULATOR</h1>
+
+      <label for="first">First option:</label>
+      <select class="select-options" name="first" id="first"></select>
+      <input
+        type="number"
+        id="firstValue"
+        name="firstValue"
+        placeholder="Wert"
+      />
+
+
+      <label for="first">Second option:</label>
+      <select class="select-options" name="second" id="second"></select>
+      <input
+        type="number"
+        id="secondValue"
+        name="secondValue"
+        placeholder="Wert"
+      />
+
+
+      <label for="first">Third option(optional):</label>
+      <select class="select-options" name="third" id="third"></select>
+      <input
+        type="number"
+        id="thirdValue"
+        name="thirdValue"
+        placeholder="Wert"
+      />
+
+      <input
+        type="submit"
+        value="Submit"
+        onclick="getValues()"
+        class="glossy-button glossy-button--gold"
+      />
+    </div>
+
+    <div class="result-view">
+      <h2>Results</h2>
+      <div class="results">
+
+      </div>
+    </div>
+  </body>
+</html>
