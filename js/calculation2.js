@@ -68,6 +68,10 @@ function getValues() {
   values[secondOption] = Number(secondValue);
   values[thirdOption] = Number(thirdValue);
 
+  if (values["houseProfit"] != null) {
+    values["houseProfit"] = 1 + values["houseProfit"] / 100;
+  }
+
   delete values["none"];
 
   console.log(values);
@@ -77,6 +81,8 @@ function getValues() {
   delete results[firstOption];
   delete results[secondOption];
   delete results[thirdOption];
+
+  results["houseProfit"] = (results["houseProfit"] - 1) * 100;
 
   console.log(results);
 
