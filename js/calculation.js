@@ -1,38 +1,66 @@
-function houseProfit(quote1, quote2) {
+function getHouseProfit(quote1, quote2) {
   return Math.round(Math.abs(1 / quote1 + 1 / quote2 - 1) * 100000) / 1000;
 }
 
-function getValues() {
-    quote1 = document.getElementById('firstQuote').value;
-    quote2 = document.getElementById('secondQuote').value;
-    houseProfitValue = document.getElementById('result').value + 1;
-    console.log(quote1);
-    console.log(quote2);
-    console.log(houseProfitValue);
+function getData() {
 
-    if ((!Number.isNaN(quote1) || !Number.isNaN(quote2 == '') && houseProfitValue != '')) {
-        if (quote1 == '') {
-            document.getElementById('firstQuote').value = getQuoteFromByPlayer(quote2, houseProfitValue);
-        }
+    
 
-        else {
-            document.getElementById('secondQuote').value = getQuoteFromByPlayer(quote1, houseProfitValue);
-        }
+    let data = {
+        "quote1": document.getElementById('quote1').value,
+        'quote2': document.getElementById('quote2').value,
+        'winPercentage1': document.getElementById('winPercentage1').value,
+        'winPercentage2': document.getElementById('winPercentage2').value,
+        'houseProfit': document.getElementById('houseProfit').value
     }
 
-    else if (quote1 != '' && quote2 != '' && houseProfitValue != '') {
-        console.log('Unsupported input.')
-    }
+    console.log(data);
+    let newData = getAllValues(data);
 
-    else {
-        houseProfitValue = houseProfit(quote1, quote2);
-        document.getElementById('result').value = houseProfitValue;
-    }
+    document.getElementById('quote1').value = newData.quote1;
+    document.getElementById('quote2').value = newData.quote2;
+    document.getElementById('winPercentage1').value = newData.winPercentage1;
+    document.getElementById('winPercentage2').value = newData.winPercentage2;
+    document.getElementById('houseProfit').value = newData.houseProfit;
 }
 
-function checkIfNumber() {
-    if (Number.isInteger(val)) {
-        
+function getAllValues(input) {
+    let quote1 = input.quote1;
+    let quote2 = input.quote2;
+    let winPercentage1 = input.winPercentage1;
+    let winPercentage2 = input.winPercentage2;
+    let houseProfit = input.houseProfit;
+    if (quote1 == null) {
+        if (quote2 == null) {
+            quote1 = getQuoteByProbAndRes(winPercentage1, houseProfit);
+        }
+        quote1 = getQuoteFromByPlayer(quote2, houseProfit);
+    }
+
+    if (quote2 == null) {
+        if (quote1 == null) {
+            quote2 = getQuoteByProbAndRes(winPercentage2, houseProfit);
+        }
+        quote2 = getQuoteFromByPlayer(quote1, houseProfit);
+    }
+
+    if (winPercentage1 == null) {
+        winPercentage1 = getProbability(quote1, quote2);
+    }
+    if (winPercentage2 == null) {
+        winPercentage2 = getProbability(quote2, quote1);
+    }
+
+    if (houseProfit == null) {
+        houseProfit = getHouseProfit(quote1, quote2);
+    }
+
+    return {
+        quote1,
+        quote2,
+        winPercentage1,
+        winPercentage2,
+        houseProfit
     }
 }
 
@@ -40,7 +68,38 @@ function getQuoteFromByPlayer(quote1, result) {
     return 1 / (result - (1 / quote1));
 }
 
-let ratings = {
+function getQuoteByProbAndRes(probability, result) {
+    return -100 / ((probability - 100) * result);
+}
+
+function getProbabilityByQuoteAndRes(quote, result) {
+    return 100 - (-100 / (quote * result) + 100 )
+}
+
+function getResByQuoteAndProb(quote, probability2) {
+    return 1 / (1 / quote + (1 - probability2 / 100) / quote);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* let ratings = {
     "quote1":"",
     "quote2":"",
     "probability1":"",
@@ -89,4 +148,4 @@ document.querySelectorAll(".select-options").forEach(function (el) {
         div.value = option.id;
         el.parentNode.insertBefore(div, el.nextSibling);
     });
-});
+}); */

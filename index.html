@@ -10,50 +10,73 @@
   </head>
   <body>
     <nav>
-      <img src="images/gold-dollar.png" alt="My Logo" />
+      <a href="/index.html">
+        <img src="images/gold-dollar.png" alt="My Logo"
+      /></a>
       <a href="html/guidance.html">Guidance</a>
       <a href="html/about-us.html">About Us</a>
-      <a href="#">FAQ</a>
+      <a href="html/faq.html">FAQ</a>
     </nav>
 
     <div class="container">
       <h1>BETTING RATE CALCULATOR</h1>
 
-      <label for="first">First option:</label>
-      <select class="select-options" name="first" id="first"></select>
+      <label>Quote 1:</label>
       <input
         type="number"
-        id="firstQuote"
-        name="firstQuote"
-        placeholder="Wert"
+        id="quote1"
+        name="quote1"
+        placeholder="Quote 1"
       />
 
-      
-      <label for="first">Second option:</label>
-      <select class="select-options" name="second" id="second"></select>
+      <label>Quote 2:</label>
       <input
         type="number"
-        id="secondQuote"
-        name="secondQuote"
-        placeholder="Wert"
+        id="quote2"
+        name="quote2"
+        placeholder="Quote 2"
       />
 
-      
-      <label for="first">Third option(optional):</label>
-      <select class="select-options" name="third" id="third"></select>
+      <label>Verdienstprozentsatz in %:</label>
       <input
         type="number"
-        id="result"
-        name="Result"
-        placeholder="Wert"
+        id="houseProfit"
+        name="houseProfit"
+        placeholder="Verdienstprozentsatz"
+      />
+
+      <label>Gewinnwahrscheinlichkeit für Quote 1:</label>
+      <input
+        type="number"
+        id="winPercentage1"
+        name="winPercentage1"
+        placeholder="Gewinnwahrscheinlichkeit für Quote 1"
+      />
+
+      <label>Gewinnwahrscheinlichkeit für Quote 2:</label>
+      <input
+        type="number"
+        id="winPercentage2"
+        name="winPercentage2"
+        placeholder="Gewinnwahrscheinlichkeit für Quote 2"
       />
 
       <input
         type="submit"
         value="Submit"
-        onclick="getValues()"
+        onclick="getAllValues()"
         class="glossy-button glossy-button--gold"
       />
     </div>
+
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/28Ar--oUDYQ"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
   </body>
 </html>
