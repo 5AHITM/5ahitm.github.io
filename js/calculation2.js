@@ -65,6 +65,13 @@ function getValues() {
   values[secondOption] = Number(secondValue);
   values[thirdOption] = Number(thirdValue);
 
+
+  if (values["none"]) {
+    delete values["none"];
+  }
+  
+  console.log(values);
+
   let results = getAllValues(values);
 
   delete results[firstOption];
@@ -116,7 +123,7 @@ let quoteOptions = [
 document.querySelectorAll(".select-options").forEach(function (el) {
   let div = document.createElement("option");
   div.innerHTML = "None";
-  div.value = "";
+  div.value = "none";
   el.appendChild(div);
   quoteOptions.forEach(function (option) {
     let div = document.createElement("option");
