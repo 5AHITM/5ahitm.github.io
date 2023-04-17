@@ -80,7 +80,7 @@ function getValues() {
     div.innerHTML =
       quoteOptions.find((element) => element.id === key).name +
       ": " +
-      Math.round(results[key] * 100) / 100;
+      Math.round(results[key] * 10000) / 10000;
     document.querySelector(".results").appendChild(div);
   }
 }
